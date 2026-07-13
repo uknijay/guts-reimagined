@@ -1,0 +1,40 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: simple
+collections:
+  - name: site
+    label: Website
+    files:
+      - name: settings
+        label: Homepage & Committee
+        file: public/content/site.json
+        fields:
+          - {label: Introduction, name: description, widget: text}
+          - {label: Join link, name: joinUrl, widget: string}
+          - {label: Contact email, name: email, widget: string}
+          - label: Committee
+            name: team
+            widget: list
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: Role, name: role, widget: string}
+              - {label: Photo, name: image, widget: image}
+      - name: events
+        label: Events
+        file: public/content/events.json
+        fields:
+          - label: Events
+            name: events
+            widget: list
+            fields:
+              - {label: URL slug, name: slug, widget: string}
+              - {label: Title, name: title, widget: string}
+              - {label: Date, name: date, widget: string}
+              - {label: Time, name: time, widget: string}
+              - {label: Venue, name: location, widget: string}
+              - {label: Type, name: type, widget: select, options: [Hackathon, Workshop, Talk, Social]}
+              - {label: Image, name: image, widget: image}
+              - {label: Description, name: description, widget: text}

@@ -1,0 +1,8 @@
+{"events":[
+  {"slug":"code-olympics-2026","title":"Code Olympics","date":"21 February 2026","time":"10:00","location":"Fraser Building","type":"Hackathon","image":"/assets/events/code-olympics.webp","description":"Our flagship team coding competition: challenges, prizes and a full day of building with friends."},
+  {"slug":"dyhtg-2025","title":"Do You Have the GUTS?","date":"25 October 2025","time":"10:00","location":"University of Glasgow","type":"Hackathon","image":"/assets/events/dyhtg.webp","description":"A high-energy hackathon for every experience level. Bring an idea—or find one and a team on the day."},
+  {"slug":"guts-ball-2026","title":"The GUTS Ball","date":"29 March 2026","time":"18:30","location":"Citation, Glasgow","type":"Social","image":"/assets/events/ball.webp","description":"Dress up, switch off the laptop and celebrate the year with the whole community."},
+  {"slug":"pub-quiz-2026","title":"GUTS × SoCS Pub Quiz","date":"5 March 2026","time":"18:30","location":"Queen Margaret Union","type":"Social","image":"/assets/events/quiz.webp","description":"Questionable team names, actually good questions and a properly relaxed night at the QMU."},
+  {"slug":"mic-drop-2026","title":"Mic Drop.exe","date":"20 January 2026","time":"19:00","location":"University of Glasgow","type":"Talk","image":"/assets/events/mic-drop.webp","description":"Fast, friendly lightning talks from students and people working across tech."},
+  {"slug":"games-night-2025","title":"Games Night","date":"2 December 2025","time":"17:30","location":"University of Glasgow","type":"Social","image":"/assets/events/games-night.webp","description":"Board games, videogames and an easy way to meet the society."}
+]}
