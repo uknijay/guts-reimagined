@@ -28,14 +28,18 @@ function Logo({ inverted = false }: { inverted?: boolean }) {
   );
 }
 
+function RubberDuck() {
+  return <svg className="rubber-duck" viewBox="0 0 120 120" aria-hidden="true"><path d="M29 56c-2-19 8-35 27-35 13 0 23 8 27 20 4-6 11-9 17-6 7 3 8 12 2 17-4 3-8 4-13 3 2 4 3 9 3 14 0 20-15 34-36 34S20 90 20 69c0-5 1-9 3-13z" fill="#f4c84b" stroke="#20212a" strokeWidth="4" strokeLinejoin="round"/><path d="M84 39c10-8 24-3 22 6-1 7-10 10-18 7" fill="#f3ad35" stroke="#20212a" strokeWidth="4"/><circle cx="46" cy="46" r="4" fill="#20212a"/><circle cx="68" cy="46" r="4" fill="#20212a"/><path d="M52 62c6 5 12 5 18 0" fill="none" stroke="#20212a" strokeWidth="3" strokeLinecap="round"/><path d="M35 90c11 7 30 8 42-1" fill="none" stroke="#e7a934" strokeWidth="5" strokeLinecap="round" opacity=".8"/></svg>;
+}
+
 function DuckSwitch() {
   const [ducks, setDucks] = useState(false);
   return (
     <>
-      <button className="duck-switch" type="button" onClick={() => setDucks((open) => !open)} aria-label="Toggle the secret duck mode" aria-pressed={ducks}>
-        <span aria-hidden="true">🦆</span><b>{ducks ? "DUCKS ON" : "SECRET"}</b>
+      <button className="duck-switch" type="button" onClick={() => setDucks((open) => !open)} aria-label="A secret GUTS Easter egg" aria-pressed={ducks}>
+        <span className="duck-dot" aria-hidden="true" />
       </button>
-      {ducks && <div className="duck-rain" aria-live="polite">{Array.from({ length: 12 }, (_, index) => <span key={index} style={{ "--i": index } as React.CSSProperties}>🦆</span>)}</div>}
+      {ducks && <div className="duck-rain" aria-live="polite">{Array.from({ length: 9 }, (_, index) => <RubberDuck key={index} />)}</div>}
     </>
   );
 }
@@ -53,7 +57,7 @@ export default function Home() {
           <a href="#events">Programme</a>
           <a href="#about">Our signal</a>
           <a href="#team">Committee</a>
-          <a href="#partners">Partners</a>
+          <Link href="/partners">Partners ↗</Link>
         </nav>
         <a className="nav-cta" href={site.joinUrl} target="_blank" rel="noreferrer">Join the network <ArrowUpRight size={15} /></a>
       </header>
@@ -120,7 +124,7 @@ export default function Home() {
       </section>
 
       <section id="partners" className="partners">
-        <div className="shell partners-shell"><div className="partners-copy"><div className="section-kicker"><span>04</span><p>Bring your best brief</p><span className="rule" /></div><h2>Back the people<br />who&apos;ll build <em>what&apos;s next.</em></h2></div><div className="partner-terminal"><div className="terminal-head"><span><Command size={15} /> PARTNER ACCESS</span><span>●</span></div><div className="terminal-body"><p><span>›</span> Looking for curious, capable people?</p><p><span>›</span> Want to make an event bigger?</p><p><span>›</span> Ready to show up for students?</p><a href={`mailto:${site.email}`}>Open a channel <ArrowUpRight size={18} /></a></div></div></div>
+        <div className="shell partners-shell"><div className="partners-copy"><div className="section-kicker"><span>04</span><p>Bring your best brief</p><span className="rule" /></div><h2>Back the people<br />who&apos;ll build <em>what&apos;s next.</em></h2><Link className="partner-page-link" href="/partners">Explore partnership options <ArrowUpRight size={17} /></Link></div><div className="partner-terminal"><div className="terminal-head"><span><Command size={15} /> PARTNER ACCESS</span><span>●</span></div><div className="terminal-body"><p><span>›</span> Looking for curious, capable people?</p><p><span>›</span> Want to make an event bigger?</p><p><span>›</span> Ready to show up for students?</p><a href={`mailto:${site.email}`}>Open a channel <ArrowUpRight size={18} /></a></div></div></div>
       </section>
 
       <section className="join">
@@ -131,7 +135,7 @@ export default function Home() {
       <footer>
         <div className="shell footer-grid">
           <div className="footer-intro"><Logo inverted /><p>Glasgow&apos;s student-built technology community. Made for the curious, the ambitious and everyone in between.</p></div>
-          <div className="footer-links"><p>Explore</p><a href="#events">Programme <ArrowUpRight size={13} /></a><a href="#about">Our signal <ArrowUpRight size={13} /></a><a href="#team">The crew <ArrowUpRight size={13} /></a><a href="#partners">Partner with us <ArrowUpRight size={13} /></a></div>
+          <div className="footer-links"><p>Explore</p><a href="#events">Programme <ArrowUpRight size={13} /></a><a href="#about">Our signal <ArrowUpRight size={13} /></a><a href="#team">The crew <ArrowUpRight size={13} /></a><Link href="/partners">Partner with us <ArrowUpRight size={13} /></Link></div>
           <div className="footer-links"><p>Stay on the signal</p>{social.map(([label, url]) => <a key={label} href={url} target="_blank" rel="noreferrer">{label} <ArrowUpRight size={13} /></a>)}<a href={`mailto:${site.email}`}>Email GUTS <ArrowUpRight size={13} /></a></div>
           <div className="footer-cta"><p>OPEN CHANNEL</p><a href={site.joinUrl} target="_blank" rel="noreferrer">Join the network <ArrowUpRight size={18} /></a></div>
         </div>
