@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -25,12 +28,25 @@ function Logo({ inverted = false }: { inverted?: boolean }) {
   );
 }
 
+function DuckSwitch() {
+  const [ducks, setDucks] = useState(false);
+  return (
+    <>
+      <button className="duck-switch" type="button" onClick={() => setDucks((open) => !open)} aria-label="Toggle the secret duck mode" aria-pressed={ducks}>
+        <span aria-hidden="true">🦆</span><b>{ducks ? "DUCKS ON" : "SECRET"}</b>
+      </button>
+      {ducks && <div className="duck-rain" aria-live="polite">{Array.from({ length: 12 }, (_, index) => <span key={index} style={{ "--i": index } as React.CSSProperties}>🦆</span>)}</div>}
+    </>
+  );
+}
+
 export default function Home() {
   const events = eventData.events;
 
 
   return (
     <main id="top">
+      <DuckSwitch />
       <header className="nav shell">
         <Logo />
         <nav aria-label="Main navigation">
