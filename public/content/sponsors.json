@@ -1,0 +1,14 @@
+{
+  "sponsors": [
+    { "name": "School of Computing Science", "logo": "/assets/sponsors/uofg_white.webp", "url": "https://www.gla.ac.uk/schools/computing/", "shape": "wide" },
+    { "name": "JP Morgan", "logo": "/assets/sponsors/jpm_white.webp", "url": "https://www.jpmorganchase.com/", "shape": "wide" },
+    { "name": "Morgan Stanley", "logo": "/assets/sponsors/morganstanley_white.webp", "url": "https://www.morganstanley.com/", "shape": "wide" },
+    { "name": "SAS", "logo": "/assets/sponsors/sas_white.webp", "url": "https://www.sas.com/", "shape": "square" },
+    { "name": "Verint", "logo": "/assets/sponsors/verint_white.webp", "url": "https://www.verint.com/", "shape": "wide" },
+    { "name": "Marshall Wace", "logo": "/assets/sponsors/marshallwace.webp", "url": "https://www.mwam.com/", "shape": "wide" },
+    { "name": "Guitar Guitar", "logo": "/assets/sponsors/gg_white.webp", "url": "https://www.guitarguitar.co.uk/", "shape": "wide" },
+    { "name": "Aladdin by BlackRock", "logo": "/assets/sponsors/blackrock.webp", "url": "https://www.blackrock.com/aladdin", "shape": "wide" },
+    { "name": "Amazon", "logo": "/assets/sponsors/amazon_white.webp", "url": "https://amazon.co.uk", "shape": "wide" },
+    { "name": "GitHub", "logo": "/assets/sponsors/github_white.webp", "url": "https://github.com/", "shape": "square" }
+  ]
+}

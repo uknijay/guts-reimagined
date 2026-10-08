@@ -1,23 +1,103 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: uknijay/guts-reimagined
   branch: main
+  base_url: https://guts-reimagined.vercel.app
+  auth_endpoint: /api/auth
 media_folder: public/uploads
 public_folder: /uploads
 publish_mode: simple
 collections:
-  - name: site
-    label: Website
+  - name: content
+    label: Website content
     files:
       - name: settings
-        label: Homepage & Committee
+        label: Pages, links & committee
         file: public/content/site.json
         fields:
-          - {label: Introduction, name: description, widget: text}
+          - {label: Search description, name: description, widget: text}
           - {label: Join link, name: joinUrl, widget: string}
           - {label: Contact email, name: email, widget: string}
+          - {label: Header logo, name: brandLogo, widget: image, hint: "Use a logo with a transparent background."}
+          - {label: Footer description, name: footerDescription, widget: text}
+          - {label: Footer sign-off, name: footerTagline, widget: string}
+          - label: Social links
+            name: socials
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: URL, name: url, widget: string}
+          - label: Homepage words
+            name: home
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Hero eyebrow, name: heroEyebrow, widget: string}
+              - {label: Hero first line, name: heroLineOne, widget: string}
+              - {label: Hero second line, name: heroLineTwo, widget: string}
+              - {label: Hero highlighted word, name: heroAccent, widget: string}
+              - {label: Hero introduction, name: heroDescription, widget: text}
+              - label: Yellow moving phrases
+                name: tickerPhrases
+                widget: list
+                field: {label: Phrase, name: phrase, widget: string}
+              - {label: About eyebrow, name: aboutEyebrow, widget: string}
+              - {label: About first line, name: aboutLineOne, widget: string}
+              - {label: About second line, name: aboutLineTwo, widget: string}
+              - {label: About highlighted word, name: aboutAccent, widget: string}
+              - label: About paragraphs
+                name: aboutParagraphs
+                widget: list
+                field: {label: Paragraph, name: paragraph, widget: text}
+              - label: Make / Learn / Belong points
+                name: qualities
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - {label: Title, name: title, widget: string}
+                  - {label: Description, name: description, widget: text}
+              - {label: Events eyebrow, name: eventsEyebrow, widget: string}
+              - {label: Events heading, name: eventsTitle, widget: string}
+              - {label: Events introduction, name: eventsDescription, widget: text}
+              - {label: Stickers eyebrow, name: stickersEyebrow, widget: string}
+              - {label: Stickers heading, name: stickersTitle, widget: string}
+              - {label: Stickers introduction, name: stickersDescription, widget: text}
+              - {label: Committee eyebrow, name: peopleEyebrow, widget: string}
+              - {label: Committee heading, name: peopleTitle, widget: string}
+              - {label: Committee introduction, name: peopleDescription, widget: text}
+              - {label: Partner invitation eyebrow, name: partnerEyebrow, widget: string}
+              - {label: Partner invitation heading, name: partnerTitle, widget: text, hint: "Use a line break to control the layout."}
+              - {label: Partner invitation description, name: partnerDescription, widget: text}
+              - {label: Closing heading, name: closingTitle, widget: text, hint: "Use a line break to control the layout."}
+              - {label: Closing description, name: closingDescription, widget: text}
+          - label: Partners page words
+            name: partners
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Hero eyebrow, name: heroEyebrow, widget: string}
+              - {label: Hero heading, name: heroTitle, widget: text, hint: "Use a line break to control the layout. The final word is highlighted."}
+              - {label: Hero introduction, name: heroDescription, widget: text}
+              - {label: Sponsors eyebrow, name: sponsorsEyebrow, widget: string}
+              - {label: Sponsors heading, name: sponsorsTitle, widget: text, hint: "Use a line break to control the layout. The final word is highlighted."}
+              - {label: Sponsors introduction, name: sponsorsDescription, widget: text}
+              - {label: Ways to help eyebrow, name: waysEyebrow, widget: string}
+              - {label: Ways to help heading, name: waysTitle, widget: text, hint: "Use a line break to control the layout."}
+              - label: Ways to help
+                name: ways
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - {label: Title, name: title, widget: string}
+                  - {label: Description, name: description, widget: text}
+              - {label: Contact eyebrow, name: contactEyebrow, widget: string}
+              - {label: Contact heading, name: contactTitle, widget: text, hint: "Use a line break to control the layout."}
+              - {label: Contact description, name: contactDescription, widget: text}
           - label: Committee
             name: team
             widget: list
+            summary: "{{fields.name}} — {{fields.role}}"
             fields:
               - {label: Name, name: name, widget: string}
               - {label: Role, name: role, widget: string}
@@ -29,6 +109,8 @@ collections:
           - label: Events
             name: events
             widget: list
+            summary: "{{fields.title}} — {{fields.date}}"
+            hint: "Add an event or drag entries to set the order on the website. Mark up to three to show their posters in the hero."
             fields:
               - {label: URL slug, name: slug, widget: string}
               - {label: Title, name: title, widget: string}
@@ -38,3 +120,33 @@ collections:
               - {label: Type, name: type, widget: select, options: [Hackathon, Workshop, Talk, Social]}
               - {label: Image, name: image, widget: image}
               - {label: Description, name: description, widget: text}
+              - {label: Event details or registration URL, name: url, widget: string, required: false, hint: "If set, an Event details link appears on the card."}
+              - {label: Feature poster in homepage hero, name: featuredOnHero, widget: boolean, default: false}
+      - name: stickers
+        label: Sticker drawer
+        file: public/content/stickers.json
+        fields:
+          - label: Stickers
+            name: stickers
+            widget: list
+            summary: "{{fields.title}} — {{fields.year}}"
+            hint: "Upload transparent PNG or WebP cut-outs only. Drag to set their order in the gallery."
+            fields:
+              - {label: Title, name: title, widget: string}
+              - {label: Year, name: year, widget: string}
+              - {label: Transparent sticker image, name: image, widget: image, hint: "The artwork should have no rectangular background."}
+              - {label: Also show on the homepage hero, name: featured, widget: boolean, default: false, hint: "The first featured sticker in this list appears on the hero collage."}
+      - name: sponsors
+        label: Sponsors & supporters
+        file: public/content/sponsors.json
+        fields:
+          - label: Sponsor board
+            name: sponsors
+            widget: list
+            summary: "{{fields.name}}"
+            hint: "Add, remove or reorder organisations here; the partners page updates automatically after publishing. Use a white or light logo on a transparent background."
+            fields:
+              - {label: Organisation name, name: name, widget: string}
+              - {label: Logo, name: logo, widget: image}
+              - {label: Website URL, name: url, widget: string}
+              - {label: Logo shape, name: shape, widget: select, options: [wide, square], default: wide}

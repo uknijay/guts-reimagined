@@ -1,1 +1,74 @@
-{"description":"We bring Glasgow's most curious students together to build, learn and turn bold ideas into real connections.","joinUrl":"https://discord.gg/FfrfkFv","email":"gutechsoc@gmail.com","team":[{"name":"Anya Chaudhary","role":"President","image":"/assets/team/Anya.webp"},{"name":"Sam Russell","role":"Vice President","image":"/assets/team/Sam.webp"},{"name":"Ahmed Ibrahim","role":"Treasurer","image":"/assets/team/Ahmed.webp"},{"name":"Luke Smith","role":"Secretary","image":"/assets/team/Luke.webp"},{"name":"Nina Wyckoff","role":"Welfare Officer","image":"/assets/team/Nina.webp"},{"name":"Jonatan Wiankowski","role":"Social Secretary","image":"/assets/team/Jon.webp"}]}
+{
+  "description": "We bring Glasgow's most curious students together to build, learn and turn bold ideas into real connections.",
+  "joinUrl": "https://discord.gg/FfrfkFv",
+  "email": "gutechsoc@gmail.com",
+  "brandLogo": "/assets/logo.svg",
+  "footerDescription": "A student society at the University of Glasgow. Built by curious people, for curious people.",
+  "footerTagline": "Made with care, and probably too much tea.",
+  "socials": [
+    { "name": "Instagram", "url": "https://www.instagram.com/gutechsoc/" },
+    { "name": "Discord", "url": "https://discord.gg/FfrfkFv" },
+    { "name": "LinkedIn", "url": "https://www.linkedin.com/company/glasgow-university-tech-society/" }
+  ],
+  "home": {
+    "heroEyebrow": "Glasgow University Tech Society",
+    "heroLineOne": "GOOD IDEAS",
+    "heroLineTwo": "START",
+    "heroAccent": "TOGETHER.",
+    "heroDescription": "Hackathons, workshops, socials and a place to find your people in tech. Everyone curious is welcome.",
+    "tickerPhrases": ["BUILD SOMETHING", "MEET YOUR PEOPLE", "TRY SOMETHING NEW"],
+    "aboutEyebrow": "Hello, we're GUTS",
+    "aboutLineOne": "A TECH SOCIETY",
+    "aboutLineTwo": "WITH ROOM FOR",
+    "aboutAccent": "YOU.",
+    "aboutParagraphs": [
+      "We're a student-run community at the University of Glasgow. We make space to experiment, learn from each other and have a good time doing it.",
+      "You don't need a polished portfolio or a perfect plan. Just turn up curious."
+    ],
+    "qualities": [
+      { "title": "Make", "description": "Build things with people who get excited about the same weird ideas." },
+      { "title": "Learn", "description": "Ask questions, pick up a new skill, and share what you know." },
+      { "title": "Belong", "description": "Find friends well beyond your course or comfort zone." }
+    ],
+    "eventsEyebrow": "Things we've made happen",
+    "eventsTitle": "THE GOOD STUFF.",
+    "eventsDescription": "A look through the GUTS event archive. Different formats, same good company.",
+    "stickersEyebrow": "Little pieces of GUTS history",
+    "stickersTitle": "COLLECT THE GOOD TIMES.",
+    "stickersDescription": "A few of the real stickers made for our hackathons and events over the years. No two years look quite the same.",
+    "peopleEyebrow": "Behind the scenes",
+    "peopleTitle": "MEET THE PEOPLE.",
+    "peopleDescription": "The committee making the space, planning the events and keeping the ducks in order.",
+    "partnerEyebrow": "For organisations",
+    "partnerTitle": "GOOD PEOPLE.\nBIGGER POSSIBILITIES.",
+    "partnerDescription": "Want to make something meaningful with Glasgow's student tech community?",
+    "closingTitle": "THERE'S A PLACE\nFOR YOU HERE.",
+    "closingDescription": "Find the next event, ask a question, or just introduce yourself."
+  },
+  "partners": {
+    "heroEyebrow": "The people behind the possibilities",
+    "heroTitle": "GOOD THINGS\nHAPPEN TOGETHER.",
+    "heroDescription": "More than a logo on a poster. The best partnerships make room for students to try things, meet people and find their place in tech.",
+    "sponsorsEyebrow": "The GUTS sponsor wall",
+    "sponsorsTitle": "A BOARD FULL\nOF GOOD COMPANY.",
+    "sponsorsDescription": "Organisations featured on the GUTS sponsor wall. Every one has helped bring a little more possibility to the community.",
+    "waysEyebrow": "How we can work together",
+    "waysTitle": "THERE'S MORE THAN\nONE WAY TO HELP.",
+    "ways": [
+      { "title": "Show up", "description": "Share what you know through a talk, workshop or a conversation with students." },
+      { "title": "Make an event bigger", "description": "Support the experiences, challenges and prizes that bring people together." },
+      { "title": "Meet future talent", "description": "Get to know curious students through genuine participation in the community." }
+    ],
+    "contactEyebrow": "Get in touch",
+    "contactTitle": "GOT AN IDEA?\nWE'RE LISTENING.",
+    "contactDescription": "Tell us a little about what you have in mind and we can find a way to make it useful for students."
+  },
+  "team": [
+    { "name": "Anya Chaudhary", "role": "President", "image": "/assets/team/Anya.webp" },
+    { "name": "Sam Russell", "role": "Vice President", "image": "/assets/team/Sam.webp" },
+    { "name": "Ahmed Ibrahim", "role": "Treasurer", "image": "/assets/team/Ahmed.webp" },
+    { "name": "Luke Smith", "role": "Secretary", "image": "/assets/team/Luke.webp" },
+    { "name": "Nina Wyckoff", "role": "Welfare Officer", "image": "/assets/team/Nina.webp" },
+    { "name": "Jonatan Wiankowski", "role": "Social Secretary", "image": "/assets/team/Jon.webp" }
+  ]
+}

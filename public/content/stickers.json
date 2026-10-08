@@ -1,0 +1,12 @@
+{
+  "stickers": [
+    { "title": "DYHTG 2024", "year": "2024", "image": "/assets/stickers/dyhtg-2024.webp", "featured": true },
+    { "title": "Code Olympics 2021", "year": "2021", "image": "/assets/stickers/code-olympics-2021.webp", "featured": true },
+    { "title": "Do You Have the GUTS? 2022", "year": "2022", "image": "/assets/stickers/dyhtg-2022.webp", "featured": false },
+    { "title": "Do You Have the GUTS? 2021", "year": "2021", "image": "/assets/stickers/dyhtg-2021.webp", "featured": false },
+    { "title": "Hacker Olympics 2019", "year": "2019", "image": "/assets/stickers/hacker-olympics-2019.webp", "featured": false },
+    { "title": "Do You Have the GUTS? 2018", "year": "2018", "image": "/assets/stickers/dyhtg-2018.webp", "featured": false },
+    { "title": "GUTS 2018", "year": "2018", "image": "/assets/stickers/guts-2018.webp", "featured": false },
+    { "title": "GUTS 2017", "year": "2017", "image": "/assets/stickers/guts-2017.webp", "featured": false }
+  ]
+}
