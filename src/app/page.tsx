@@ -3,144 +3,103 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowDownRight,
-  ArrowUpRight,
-  CircleDot,
-  Command,
-  Sparkles,
-} from "lucide-react";
-import eventData from "../../public/content/events.json";
+import { ArrowDownRight, ArrowUpRight, Menu, X } from "lucide-react";
+import eventsData from "../../public/content/events.json";
 import site from "../../public/content/site.json";
 
-const social = [
+const socials = [
   ["Instagram", "https://www.instagram.com/gutechsoc/"],
-  ["Discord", "https://discord.gg/FfrfkFv"],
+  ["Discord", site.joinUrl],
   ["LinkedIn", "https://www.linkedin.com/company/glasgow-university-tech-society/"],
 ];
 
-function Logo({ inverted = false }: { inverted?: boolean }) {
-  return (
-    <Link href="#top" className={`brand ${inverted ? "brand-inverted" : ""}`} aria-label="GUTS home">
-      <span className="brand-mark"><Image src="/assets/logo.svg" width={24} height={28} alt="" /></span>
-      <span>GU Tech<br />Society</span>
-    </Link>
-  );
+function Brand({ light = false }: { light?: boolean }) {
+  return <Link href="/" className={`brand ${light ? "brand-light" : ""}`} aria-label="Glasgow University Tech Society home">
+    <Image src="/assets/logo.svg" width={40} height={45} alt="" priority />
+    <span><small>GLASGOW UNIVERSITY</small>TECH SOCIETY</span>
+  </Link>;
 }
 
-function RubberDuck() {
-  return <svg className="rubber-duck" viewBox="0 0 120 120" aria-hidden="true"><path d="M29 56c-2-19 8-35 27-35 13 0 23 8 27 20 4-6 11-9 17-6 7 3 8 12 2 17-4 3-8 4-13 3 2 4 3 9 3 14 0 20-15 34-36 34S20 90 20 69c0-5 1-9 3-13z" fill="#f4c84b" stroke="#20212a" strokeWidth="4" strokeLinejoin="round"/><path d="M84 39c10-8 24-3 22 6-1 7-10 10-18 7" fill="#f3ad35" stroke="#20212a" strokeWidth="4"/><circle cx="46" cy="46" r="4" fill="#20212a"/><circle cx="68" cy="46" r="4" fill="#20212a"/><path d="M52 62c6 5 12 5 18 0" fill="none" stroke="#20212a" strokeWidth="3" strokeLinecap="round"/><path d="M35 90c11 7 30 8 42-1" fill="none" stroke="#e7a934" strokeWidth="5" strokeLinecap="round" opacity=".8"/></svg>;
+function DuckMark({ className = "" }: { className?: string }) {
+  return <svg className={className} viewBox="0 0 72 64" fill="none" aria-hidden="true"><path d="M12 33c0-8 6-14 14-14 4 0 7 1 10 3-1-2-2-5-2-8 0-7 5-12 12-12s12 5 12 12c0 1 0 3-1 4l12 3-10 7c-2 17-12 29-29 29-13 0-23-8-26-19 3 1 6 1 8 0Z" fill="currentColor"/><circle cx="50" cy="13" r="2.5" fill="#153F9B"/><path d="M7 59c6-3 11-3 17 0m6 0c6-3 11-3 17 0m6 0c6-3 11-3 17 0" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>;
 }
 
-function DuckSwitch() {
-  const [ducks, setDucks] = useState(false);
-  return (
-    <>
-      <button className="duck-switch" type="button" onClick={() => setDucks((open) => !open)} aria-label="A secret GUTS Easter egg" aria-pressed={ducks}>
-        <span className="duck-dot" aria-hidden="true" />
-      </button>
-      {ducks && <div className="duck-rain" aria-live="polite">{Array.from({ length: 9 }, (_, index) => <RubberDuck key={index} />)}</div>}
-    </>
-  );
+function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  return <header className="site-header"><div className="header-inner wrap">
+    <Brand light />
+    <nav className={`site-nav ${open ? "is-open" : ""}`} aria-label="Main navigation" id="site-navigation">
+      <a href="#about" onClick={() => setOpen(false)}>About</a>
+      <a href="#events" onClick={() => setOpen(false)}>Our events</a>
+      <a href="#people" onClick={() => setOpen(false)}>The people</a>
+      <Link href="/partners" onClick={() => setOpen(false)}>Partners</Link>
+      <a className="mobile-join" href={site.joinUrl} target="_blank" rel="noreferrer">Join our Discord <ArrowUpRight size={18}/></a>
+    </nav>
+    <a className="header-join" href={site.joinUrl} target="_blank" rel="noreferrer">Join our Discord <ArrowUpRight size={17}/></a>
+    <button className="menu-button" type="button" aria-expanded={open} aria-controls="site-navigation" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen(!open)}>{open ? <X size={25} aria-hidden="true"/> : <Menu size={25} aria-hidden="true"/>}</button>
+  </div></header>;
+}
+
+function DuckSurprise() {
+  const [show, setShow] = useState(false);
+  return <>
+    <button className="duck-button" type="button" onClick={() => setShow(!show)} aria-pressed={show} aria-label="Show the GUTS ducks"><DuckMark /></button>
+    {show && <div className="duck-parade" aria-live="polite"><span>you found the ducks!</span>{[0, 1, 2, 3, 4].map(n => <DuckMark key={n} className={`parade-duck duck-${n}`} />)}</div>}
+  </>;
+}
+
+function SectionHeading({ kicker, title, note }: { kicker: string; title: string; note?: string }) {
+  return <div className="section-heading"><div><span className="section-label">{kicker}</span><h2>{title}</h2></div>{note && <p>{note}</p>}</div>;
 }
 
 export default function Home() {
-  const events = eventData.events;
-
-
-  return (
-    <main id="top">
-      <DuckSwitch />
-      <header className="nav shell">
-        <Logo />
-        <nav aria-label="Main navigation">
-          <a href="#events">Programme</a>
-          <a href="#about">Our signal</a>
-          <a href="#team">Committee</a>
-          <Link href="/partners">Partners ↗</Link>
-        </nav>
-        <a className="nav-cta" href={site.joinUrl} target="_blank" rel="noreferrer">Join the network <ArrowUpRight size={15} /></a>
-      </header>
-
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-glow" aria-hidden="true" />
-        <div className="shell hero-shell">
-          <div className="hero-intro">
-            <p className="eyebrow"><CircleDot size={12} /> University of Glasgow · Est. 2013</p>
-            <h1 id="hero-title">A better<br /><span>signal</span> for<br />future tech.</h1>
-            <p className="lede">{site.description}</p>
-            <div className="hero-actions">
-              <a className="button button-electric" href="#events">Explore the programme <ArrowDownRight size={18} /></a>
-              <a className="inline-link" href="#about">Why GUTS <span>↘</span></a>
-            </div>
-          </div>
-
-          <div className="signal-console" aria-label="GUTS activity preview">
-            <div className="console-top"><span>LIVE / GUTS NETWORK</span><span>GLA · 55.872°N</span></div>
-            <div className="console-stage">
-              <div className="radar-ring ring-one" /><div className="radar-ring ring-two" /><div className="radar-ring ring-three" />
-              <div className="radar-sweep" />
-              <div className="core-mark"><Image src="/assets/logo.svg" width={68} height={76} alt="" priority /></div>
-              <span className="node node-a" /><span className="node node-b" /><span className="node node-c" />
-              <p className="console-label label-a">BUILD / 01</p><p className="console-label label-b">MEET / 02</p><p className="console-label label-c">GO / 03</p>
-            </div>
-            <div className="console-bottom"><span><i /> SYSTEMS NOMINAL</span><span>SCROLL TO ENTER</span></div>
-          </div>
+  return <main id="top">
+    <a className="skip-link" href="#about">Skip to main content</a>
+    <SiteHeader />
+    <section className="hero" aria-labelledby="hero-title">
+      <div className="hero-hexes" aria-hidden="true"><i/><i/><i/><i/><i/></div>
+      <div className="wrap hero-layout">
+        <div className="hero-copy">
+          <p className="hero-overline"><span className="live-dot"/> Glasgow University Tech Society</p>
+          <h1 id="hero-title">GOOD IDEAS<br/>START <span>TOGETHER.</span></h1>
+          <p className="hero-description">Hackathons, workshops, socials and a place to find your people in tech. Everyone curious is welcome.</p>
+          <div className="hero-actions"><a className="button button-white" href={site.joinUrl} target="_blank" rel="noreferrer">Join our Discord <ArrowUpRight size={19}/></a><a className="text-link light-link" href="#events">See what we do <ArrowDownRight size={19}/></a></div>
         </div>
-        <div className="hero-index shell" aria-hidden="true"><span>01—06</span><span>SCROLL FOR THE GOOD STUFF</span><span>↓</span></div>
-      </section>
-
-      <section className="marquee" aria-label="GUTS activities"><div>HACKATHONS <i /> WORKSHOPS <i /> SOCIALS <i /> CAREERS <i /> TALKS <i /> HACKATHONS <i /> WORKSHOPS <i /> SOCIALS <i /></div></section>
-
-      <section id="events" className="programme shell">
-        <div className="section-kicker"><span>01</span><p>On the signal</p><span className="rule" /></div>
-        <div className="programme-head"><h2>The good stuff<br />is <em>already live.</em></h2><p>Workshops that unlock something new. Events that put you in a room with your people. A calendar designed to make your degree bigger than a timetable.</p></div>
-        <div className="event-grid">
-          {events.slice(0, 4).map((event, index) => <article className="event-card" key={event.slug}>
-            <a className="event-card-image" href={site.joinUrl} target="_blank" rel="noreferrer" aria-label={`Find out about ${event.title}`}>
-              <Image src={event.image} fill alt={`${event.title} event artwork`} sizes="(max-width: 700px) 100vw, 50vw" priority={index === 0} />
-              <span className="event-type">0{index + 1} / {event.type}</span><span className="event-card-arrow"><ArrowUpRight size={20} /></span>
-            </a>
-            <div className="event-card-copy"><p>{event.date} · {event.location}</p><h3>{event.title}</h3><span>{event.description}</span></div>
-          </article>)}
+        <div className="hero-art" aria-label="A collage of GUTS event posters">
+          <div className="hero-art-back" aria-hidden="true">GUTS<br/>GUTS<br/>GUTS</div>
+          <div className="poster poster-back"><Image src="/assets/events/quiz.webp" fill alt="GUTS pub quiz poster" sizes="(max-width: 700px) 32vw, 230px" /></div>
+          <div className="poster poster-middle"><Image src="/assets/events/dyhtg.webp" fill alt="Do You Have the GUTS? hackathon poster" sizes="(max-width: 700px) 42vw, 270px" /></div>
+          <div className="poster poster-front"><Image src="/assets/events/code-olympics.webp" fill alt="Code Olympics event poster" sizes="(max-width: 700px) 50vw, 320px" priority /></div>
+          <span className="hero-sticker"><DuckMark/> STUDENT<br/>POWERED</span>
         </div>
-        <a className="archive-link event-archive" href="#archive">Browse the archive <ArrowDownRight size={18} /></a>
-      </section>
+      </div>
+      <div className="hero-bottom wrap"><span>MADE IN GLASGOW, FOR THE CURIOUS.</span><a href="#about" aria-label="Scroll to learn about GUTS"><ArrowDownRight size={24}/></a></div>
+    </section>
 
-      <section id="about" className="manifesto">
-        <div className="signal-noise" aria-hidden="true" />
-        <div className="shell manifesto-shell">
-          <div className="section-kicker inverse"><span>02</span><p>Our signal</p><span className="rule" /></div>
-          <div className="manifesto-grid"><div><p className="mono-note">NO GATEKEEPING.<br />NO PERFECT PORTFOLIO REQUIRED.</p><h2>Find your<br /><em>frequency.</em></h2></div><div className="manifesto-copy"><p>GUTS is the layer beneath the lecture slides: the projects that get you obsessed, the people who answer the weird question, and the first spark of a career that fits.</p><a className="button button-cream" href={site.joinUrl} target="_blank" rel="noreferrer">Plug into GUTS <ArrowUpRight size={18} /></a></div></div>
-          <div className="principles"><div><span>01</span><h3>Learn out loud.</h3><p>Try the thing, ask the question, share the work-in-progress.</p></div><div><span>02</span><h3>Make it real.</h3><p>Ideas become projects when the right people are in the room.</p></div><div><span>03</span><h3>Pass it on.</h3><p>The best communities leave the door wider than they found it.</p></div></div>
-        </div>
-      </section>
+    <div className="ticker" aria-label="What GUTS does"><div>BUILD SOMETHING <span>✳</span> MEET YOUR PEOPLE <span>✳</span> TRY SOMETHING NEW <span>✳</span> BUILD SOMETHING <span>✳</span> MEET YOUR PEOPLE <span>✳</span></div></div>
 
-      <section id="team" className="team shell">
-        <div className="section-kicker"><span>03</span><p>People with the passcodes</p><span className="rule" /></div>
-        <div className="team-head"><h2>Meet the<br /><em>operators.</em></h2><p>The committee keeping the signal sharp, welcoming and a little bit chaotic.</p></div>
-        <div className="team-grid">{site.team.map((member, index) => <article className="person" key={member.name}><div className="portrait"><Image src={member.image} fill alt={member.name} sizes="(max-width: 700px) 50vw, 25vw" /><span>0{index + 1}</span></div><p>{member.role}</p><h3>{member.name}</h3></article>)}</div>
-      </section>
+    <section className="intro section-pad" id="about">
+      <div className="wrap intro-layout">
+        <div className="intro-title"><span className="section-label">Hello, we&apos;re GUTS</span><h2>A TECH SOCIETY<br/>WITH ROOM FOR <em>YOU.</em></h2></div>
+        <div className="intro-copy"><p>We&apos;re a student-run community at the University of Glasgow. We make space to experiment, learn from each other and have a good time doing it.</p><p>You don&apos;t need a polished portfolio or a perfect plan. Just turn up curious.</p><a className="text-link" href={site.joinUrl} target="_blank" rel="noreferrer">Join our Discord <ArrowUpRight size={19}/></a></div>
+      </div>
+      <div className="wrap intro-rail"><div><b>Make</b><span>Build things with people who get excited about the same weird ideas.</span></div><div><b>Learn</b><span>Ask questions, pick up a new skill, and share what you know.</span></div><div><b>Belong</b><span>Find friends well beyond your course or comfort zone.</span></div></div>
+    </section>
 
-      <section id="partners" className="partners">
-        <div className="shell partners-shell"><div className="partners-copy"><div className="section-kicker"><span>04</span><p>Bring your best brief</p><span className="rule" /></div><h2>Back the people<br />who&apos;ll build <em>what&apos;s next.</em></h2><Link className="partner-page-link" href="/partners">Explore partnership options <ArrowUpRight size={17} /></Link></div><div className="partner-terminal"><div className="terminal-head"><span><Command size={15} /> PARTNER ACCESS</span><span>●</span></div><div className="terminal-body"><p><span>›</span> Looking for curious, capable people?</p><p><span>›</span> Want to make an event bigger?</p><p><span>›</span> Ready to show up for students?</p><a href={`mailto:${site.email}`}>Open a channel <ArrowUpRight size={18} /></a></div></div></div>
-      </section>
+    <section className="events-section section-pad" id="events"><div className="wrap">
+      <SectionHeading kicker="Things we've made happen" title="THE GOOD STUFF." note="A look through the GUTS event archive. Different formats, same good company."/>
+      <div className="events-layout">{eventsData.events.map((event, index) => <article className={`event event-${index+1}`} key={event.slug}>
+        <div className="event-image"><Image src={event.image} fill alt={`${event.title} poster`} sizes="(max-width: 650px) 100vw, (max-width: 950px) 50vw, 33vw" /></div>
+        <div className="event-info"><span>{event.type} · {event.date}</span><h3>{event.title}</h3><p>{event.description}</p></div>
+      </article>)}</div>
+    </div></section>
 
-      <section className="join">
-        <div className="join-grid" aria-hidden="true" />
-        <div className="shell join-shell"><Sparkles size={24} /><p className="eyebrow">The network is open</p><h2>Make your next<br />move <em>louder.</em></h2><p>Curiosity is the only prerequisite. We&apos;ll handle the rest.</p><a className="button button-electric" href={site.joinUrl} target="_blank" rel="noreferrer">Join the Discord <ArrowUpRight size={18} /></a></div>
-      </section>
+    <section className="people-section section-pad" id="people"><div className="wrap"><SectionHeading kicker="Behind the scenes" title="MEET THE PEOPLE." note="The committee making the space, planning the events and keeping the ducks in order."/><div className="people-grid">{site.team.map((person, index) => <article className="person" key={person.name}><div className="person-photo"><Image src={person.image} fill alt={person.name} sizes="(max-width: 650px) 50vw, (max-width: 950px) 33vw, 18vw"/></div><div className="person-info"><span>{person.role}</span><h3>{person.name}</h3></div><span className="person-corner" aria-hidden="true">0{index+1}</span></article>)}</div></div></section>
 
-      <footer>
-        <div className="shell footer-grid">
-          <div className="footer-intro"><Logo inverted /><p>Glasgow&apos;s student-built technology community. Made for the curious, the ambitious and everyone in between.</p></div>
-          <div className="footer-links"><p>Explore</p><a href="#events">Programme <ArrowUpRight size={13} /></a><a href="#about">Our signal <ArrowUpRight size={13} /></a><a href="#team">The crew <ArrowUpRight size={13} /></a><Link href="/partners">Partner with us <ArrowUpRight size={13} /></Link></div>
-          <div className="footer-links"><p>Stay on the signal</p>{social.map(([label, url]) => <a key={label} href={url} target="_blank" rel="noreferrer">{label} <ArrowUpRight size={13} /></a>)}<a href={`mailto:${site.email}`}>Email GUTS <ArrowUpRight size={13} /></a></div>
-          <div className="footer-cta"><p>OPEN CHANNEL</p><a href={site.joinUrl} target="_blank" rel="noreferrer">Join the network <ArrowUpRight size={18} /></a></div>
-        </div>
-        <div className="shell footer-bottom"><p>© 2026 GUTS · Made by students with excellent taste in bad sleep schedules.</p><p>GUTS / GLA / EST. 2013</p></div>
-      </footer>
-    </main>
-  );
+    <section className="partner-strip"><div className="wrap partner-strip-inner"><div><span className="section-label">For organisations</span><h2>GOOD PEOPLE.<br/>BIGGER POSSIBILITIES.</h2><p>Want to make something meaningful with Glasgow&apos;s student tech community?</p></div><Link className="button button-outline" href="/partners">Partner with GUTS <ArrowUpRight size={20}/></Link></div></section>
+
+    <section className="closing"><div className="wrap closing-inner"><DuckMark className="closing-duck"/><h2>THERE&apos;S A PLACE<br/>FOR YOU HERE.</h2><p>Find the next event, ask a question, or just introduce yourself.</p><a className="button button-white" href={site.joinUrl} target="_blank" rel="noreferrer">Join our Discord <ArrowUpRight size={19}/></a></div></section>
+    <footer className="footer"><div className="wrap footer-main"><div><Brand light/><p>A student society at the University of Glasgow.<br/>Built by curious people, for curious people.</p></div><div className="footer-nav"><div><span>Explore</span><a href="#about">About</a><a href="#events">Our events</a><a href="#people">The people</a><Link href="/partners">Partners</Link></div><div><span>Elsewhere</span>{socials.map(([name, url]) => <a href={url} target="_blank" rel="noreferrer" key={name}>{name} <ArrowUpRight size={14}/></a>)}<a href={`mailto:${site.email}`}>Email us <ArrowUpRight size={14}/></a></div></div></div><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} Glasgow University Tech Society</span><span>Made with care, and probably too much tea.</span></div></footer>
+    <DuckSurprise />
+  </main>;
 }
